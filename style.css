@@ -326,3 +326,28 @@ h1, .pd h2, .si-title, .prose h2 { font-family: Georgia, 'Times New Roman', seri
 
 /* toasts and welcome banner in espresso instead of pure black */
 .toast, .welcome-pop { background: var(--espresso); }
+
+/* ---------- Product pop-up on phones ----------
+   One scrolling sheet (photo + details) instead of a fixed box with a scroller hidden below the photo,
+   a shorter photo so the Buy button is close to the top, and no scroll leaking to the page behind. */
+html.modal-open, html.modal-open body { overflow: hidden; }
+.look-dialog { overscroll-behavior: contain; }
+@media (max-width: 640px) {
+  .look-dialog {
+    width: calc(100vw - 24px);
+    max-height: calc(100vh - 40px); max-height: calc(100dvh - 40px);
+    overflow-y: auto; -webkit-overflow-scrolling: touch; border-radius: 16px;
+  }
+  .look { flex-direction: column; flex-wrap: nowrap; max-height: none; }
+  .look-img { flex: none; height: 40vh; height: 40dvh; max-height: none; }
+  .look-img img { width: 100%; height: 100%; max-height: none; object-fit: contain; }
+  .look-img .ph { min-height: 0; height: 100%; }
+  .look-side { flex: none; max-height: none; overflow: visible; padding: 18px 20px 24px; }
+  .pd { gap: 12px; }
+  .pd h2 { font-size: 22px; }
+  .buy-btn { height: 48px; }
+}
+#pd-name:focus { outline: none; }
+@media (max-width: 640px) {
+  .pd-actions .btn { padding: 0 10px; font-size: 14px; white-space: nowrap; }
+}

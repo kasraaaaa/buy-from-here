@@ -355,7 +355,7 @@
       '<div class="pd">' +
         '<div class="look-head">' + (b.slug ? '<a class="pd-brand" href="#/b/' + esc(b.slug) + '" data-close-pd>' + esc(b.name) + '</a>' : '<span></span>') +
           '<button type="button" class="icon-btn close-btn" data-close-pd aria-label="Close">&times;</button></div>' +
-        '<h2 id="pd-name">' + esc(p.name) + '</h2>' + priceHtml(p) +
+        '<h2 id="pd-name" tabindex="-1">' + esc(p.name) + '</h2>' + priceHtml(p) +
         '<div class="pd-meta">' + (p.cat ? '<span>' + esc(p.cat.name) + '</span>' : '') +
           '<span>Price in ' + (p.currency === 'USD' ? 'US dollars' : 'Canadian dollars') + '</span>' +
           (onSale ? '<span>On sale</span>' : '') + (p.in_stock ? '' : '<span>Sold out for now</span>') + '</div>' +
@@ -377,13 +377,17 @@
       if (navigator.share) navigator.share({ title: p.name, url: url }).catch(function () {});
       else if (navigator.clipboard) { navigator.clipboard.writeText(url); e.target.textContent = 'Link copied'; }
     });
-    if (!pd.open) pd.showModal();
+    if (!pd.open) { document.documentElement.classList.add('modal-open'); pd.showModal(); }
+    pd.scrollTop = 0;
     pd.querySelector('.look-side').scrollTop = 0;
+    // start focus on the product name, not the brand link, so no outline box appears on open
+    var nameEl = document.getElementById('pd-name'); if (nameEl) nameEl.focus({ preventScroll: true });
   }
   pd.addEventListener('click', function (e) {
     if (e.target === pd || e.target.closest('[data-close-pd]')) pd.close();
   });
   pd.addEventListener('close', function () {
+    document.documentElement.classList.remove('modal-open');
     openId = null;
     if (/^#\/p\//.test(location.hash)) history.replaceState(null, '', '#/');
   });

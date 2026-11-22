@@ -271,3 +271,58 @@ a:hover .img { opacity: .88; }
   .look-img .ph { min-height: 300px; }
   .pd-more-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+
+/* ---------- Cream palette (matches the shopper emails) ----------
+   Warm white page, cream header and footer, sand details, camel for Buy and saved hearts.
+   Black stays for the main text, the logo and the dark buttons. */
+:root {
+  --cream: #F6EFE7; --paper: #FFFCF8; --sand: #EADBCB; --sand-soft: #F3EAE0;
+  --camel: #B08968; --camel-dark: #8C6A4F; --espresso: #3B302A; --taupe: #8A7B70; --line: #E7DACC;
+}
+body { background: var(--paper); }
+.site-header { background: var(--cream); border-bottom-color: var(--line); }
+.logo span { color: var(--camel); }
+.nav a { color: var(--taupe); }
+.nav a.active { color: #111; }
+.search input { background: var(--paper); border-color: var(--line); }
+.search input:focus { border-color: var(--camel); background: #fff; }
+.btn, .chip { border-color: var(--line); background: var(--paper); }
+.btn:hover, .chip:hover { border-color: var(--camel); }
+.btn-dark, .chip[aria-pressed="true"] { background: #111; border-color: #111; }
+.btn-dark:hover { border-color: #111; }
+
+/* serif headings, like the emails */
+h1, .pd h2, .si-title, .prose h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.01em; }
+.eyebrow, .brand-label, .pd-brand { color: var(--camel-dark); }
+.muted, .dir-count, .pin-meta span:last-child, .dir-meta span:not(.dot) { color: var(--taupe); }
+
+/* product cards */
+.pin-photo, .look-img, .brand-cover, .shop-photo { background: var(--sand-soft); }
+.price s { color: var(--taupe); }
+.price .sale { color: var(--camel-dark); }
+.tag { background: var(--camel); }
+.tag.light { background: var(--paper); color: var(--camel-dark); border-color: var(--line); }
+.heart { background: rgba(255,252,248,.94); }
+.heart[aria-pressed="true"] { color: var(--camel); }
+.heart[aria-pressed="true"] svg { fill: var(--camel); }
+.cart-count, .nav-count { background: var(--camel); }
+
+/* product pop-up */
+.buy-btn { background: var(--camel); border-color: var(--camel); }
+.buy-btn:hover { background: var(--camel-dark); border-color: var(--camel-dark); color: #fff; }
+.pd-meta span { background: var(--sand-soft); border-color: var(--line); color: var(--espresso); }
+.disclosure { color: var(--taupe); }
+.pd-more { border-top-color: var(--line); }
+
+/* panels, dialogs, follow chips */
+.panel { background: var(--cream); border-color: var(--line); }
+.dialog { border-color: var(--line); background: var(--paper); }
+.follow-chip { border-color: var(--line); background: var(--paper); }
+.divider::before, .divider::after { background: var(--line); }
+
+/* footer as a soft sand band */
+.site-footer { background: var(--cream); border-top-color: var(--line); }
+.footer-row { color: var(--taupe); }
+
+/* toasts and welcome banner in espresso instead of pure black */
+.toast, .welcome-pop { background: var(--espresso); }

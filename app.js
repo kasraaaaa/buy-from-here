@@ -14,7 +14,7 @@
   var sortBy = 'new';
   var currentSource = 'home';
 
-  var tones = ['#ecebe8', '#e2e1dd', '#d8d7d2', '#efeeec', '#1b1b1b', '#2a2a2a', '#a3a3a3', '#b4b4b4'];
+  var tones = ['#F3EAE0', '#EADBCB', '#E2CFBC', '#F6EFE7', '#3B302A', '#4A3D34', '#C9AE94', '#D8C3AE'];
 
   // ---------- Small helpers ----------
   function esc(s) {
@@ -56,8 +56,8 @@
   // Brands' own photo when there is one, otherwise a quiet placeholder with the category and name.
   function placeholder(p, height) {
     var t = tones[hash(p.id) % tones.length];
-    var dark = ['#1b1b1b', '#2a2a2a'].indexOf(t) > -1;
-    return '<span class="ph" style="background:' + t + ';color:' + (dark ? '#e6e6e6' : '#1a1a1a') + (height ? ';height:' + height + 'px' : '') + '">' +
+    var dark = ['#3B302A', '#4A3D34'].indexOf(t) > -1;
+    return '<span class="ph" style="background:' + t + ';color:' + (dark ? '#F3EAE0' : '#3B302A') + (height ? ';height:' + height + 'px' : '') + '">' +
       '<span class="label">' + esc((p.cat && p.cat.name) || 'Product') + '</span><span class="ph-name">' + esc(p.name) + '</span></span>';
   }
   function photo(p, opts) {

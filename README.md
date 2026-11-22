@@ -45,6 +45,17 @@ Then check `select * from feed_runs order by id desc;` for what came in and what
 
 What the importer does: maps each network's column names, sorts products into our categories, skips menswear and anything not in CAD or USD, creates brands as needed, and marks products sold out when they drop out of the feed (it never deletes them, and does nothing if a download comes back empty).
 
+## Welcome emails
+
+Every new shopper gets a welcome email once their account is confirmed (Google sign-ups right away, email-link sign-ups when they first use the link). Two triggers on `auth.users` call the `send-welcome` Edge Function, which sends through Gmail SMTP and records each send in `welcome_emails` so nobody gets two. The design lives in `supabase/functions/send-welcome/welcome-email.js` (nude palette: cream, sand, camel).
+
+Setup: the Gmail app password is the Edge Function secret `GMAIL_APP_PASSWORD`. Sender address and name are in `app_settings` (`mail_from`, `mail_from_name`). When the site moves to its own domain and Resend, only the sending lines in `index.ts` change.
+
+```sql
+-- who got a welcome email, and any errors
+select email, sent_at, error from welcome_emails order by created_at desc;
+```
+
 ## Handy queries
 
 ```sql
